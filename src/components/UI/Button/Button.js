@@ -23,6 +23,11 @@ const button = (props) => {
         case 'project':
             title = 'Projects';
             break;
+
+        case 'linkedin':
+            title = "Linkedin";
+            break;
+            
         default:
             break;
     }

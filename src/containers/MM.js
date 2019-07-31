@@ -17,29 +17,40 @@ class MM extends Component {
         nextWidth: 'auto',
         projectButton: {
             type: 'project',
-            position: 'absolute',
+            float: 'left',
+            //position: 'absolute',
+            // 31.5
             marginLeft: "31.5%",
             backgroundImage: 'url(' + require('./project_icon_blue.svg') + ')',
-            
+            // 33.6
             marginTop: '33.6%',
-            width: '48px',
-            height : '48px',
+            width: '39px',
+            height : '39px',
             backgroundRepeat: 'no-repeat',
             backgroundSize : '100%'
         },
         linkedinButton: {
-
+            type: 'linkedin',
+            float: 'left',
+            marginLeft: '5.7%',
+            marginTop: '33.6%',
+            width: '39px',
+            height: '39px',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100%',
+            backgroundImage: 'url(' + require('./linkedin_icon_blue.svg') + ')'
         },
 
         buttonChange: 1.0,
-        buttonSize: 48,
-        buttonWidth: '48px',
+        buttonSize: 39,
+        buttonWidth: '39px',
         leftSize: 300,
         test: false
     }
 
     componentDidMount () {
         
+      console.log(window.result.parsedResult.browser.name);
         // Sets initial values for width
         this.getBaseline();
         // Sets initial values for height based on width ratio
@@ -56,7 +67,11 @@ class MM extends Component {
     getBaseline = () => {
         const curWidth = window.innerWidth;
         
-        this.setState({prevWidth: curWidth, test: true});
+        this.setState({
+            width: curWidth,
+            prevWidth: curWidth,
+             test: true
+            });
         console.log("[prevWidth baseline] " + this.state.prevWidth + " " + curWidth + " " + this.state.test);
     }
 
@@ -75,6 +90,11 @@ class MM extends Component {
             projectButton: {
                 ...this.state.projectButton, 
                 // the buttons are square so I use the same width as height
+                height: newButtonWidth,
+                width: newButtonWidth
+            },
+            linkedinButton: {
+                ...this.state.linkedinButton,
                 height: newButtonWidth,
                 width: newButtonWidth
             }
@@ -113,6 +133,24 @@ class MM extends Component {
                 };
 
 
+                break;
+
+            case 'linkedin':
+                
+                mouseOverState = {
+                    linkedinButton: {
+                        ...this.state.linkedinButton,
+                        backgroundImage: 'url(' + require('./linkedin_icon_green.svg') + ')'
+                    }
+                };
+
+                mouseOutState = {
+                    linkedinButton: {
+                        ...this.state.linkedinButton,
+                        backgroundImage: 'url(' + require('./linkedin_icon_blue.svg') + ')'
+                    }
+                };
+                
                 break;
 
             default:
@@ -203,7 +241,7 @@ class MM extends Component {
 
     render(){
         const deckStyles = {
-            "backgroundImage": 'url(' + require('./deck2_3_with_chair_flatter.png') + ')',
+            "backgroundImage": 'url(' + require('./deck2_2_with_chair_flatter.png') + ')',
             
             'display': 'flex',
             'minHeight': this.state.minHeight,
@@ -235,6 +273,7 @@ class MM extends Component {
             {/*<div className="imgTest" style={imgPlace} onMouseOver={this.hoverButton} onMouseOut={this.hoverButton}></div>*/}
             {/*src={project_icon_green} style={imgSizes} alt="green project icon"*/}
             <Button styles={this.state.projectButton} hover={this.hoverButton} ></Button>
+            <Button styles={this.state.linkedinButton} hover={this.hoverButton} />
             </div>
         );
     }
