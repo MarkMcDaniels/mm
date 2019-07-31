@@ -1,0 +1,1 @@
+export const GET_RESUME = 'GET_RESUME';

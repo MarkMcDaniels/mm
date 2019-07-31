@@ -1,0 +1,21 @@
+
+
+.Deck {
+    color: red;
+    align-content: center;
+    width: 1900px;
+    background-repeat: none;
+    
+    height: auto;
+    background-size: contain;
+    min-height: 640px;
+}
+
+
+.imgTest {
+   width: 38px;
+}
+
+.imgTest:hover {
+   
+}
