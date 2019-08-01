@@ -241,7 +241,7 @@ class MM extends Component {
 
     render(){
         const deckStyles = {
-            "backgroundImage": 'url(' + require('./deck2_2_with_chair_flatter.png') + ')',
+            "backgroundImage": 'url(' + require('./deck2_4_with_chair_flatter.svg') + ')',
             
             'display': 'flex',
             'minHeight': this.state.minHeight,
