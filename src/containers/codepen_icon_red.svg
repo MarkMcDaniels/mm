@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="linkedin_icon_green.svg">
+   sodipodi:docname="codepen_icon_red.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,19 +70,39 @@
        sodipodi:cx="7.9962249"
        sodipodi:type="arc"
        id="path7354"
-       style="opacity:1;fill:#00ff00;fill-opacity:1;stroke-width:1.79234529"
-       inkscape:export-xdpi="240"
-       inkscape:export-ydpi="240" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.2356863px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.22941914px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3.7702243"
-       y="293.05853"
-       id="text7531"><tspan
-         sodipodi:role="line"
-         id="tspan7529"
-         x="3.7702243"
-         y="293.05853"
-         style="fill:#ffffff;fill-opacity:1;stroke-width:0.22941914px">in</tspan></text>
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke-width:1.79234529" />
+    <g
+       id="g1040"
+       transform="matrix(1.7362766,0,0,1.7362766,-582.74414,-143.77216)">
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path220"
+         d="m 340.35258,246.64937 3.01929,1.72531 -3.01929,1.72531 -3.01928,-1.72531 z"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.34506139;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path222"
+         d="m 340.35258,246.64937 v 1.72531 l -3.01928,1.72531 3.01928,1.7253 3.01929,-1.7253 -3.01929,-1.72531"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.34506139;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path224"
+         d="m 340.35258,250.09999 v 1.7253"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.34506139;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path226"
+         d="m 343.53989,248.36349 v 1.7253"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.34506139;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path228"
+         d="m 337.14288,248.37468 v 1.72531"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.34506139;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
   </g>
 </svg>

@@ -5,10 +5,10 @@
     align-content: center;
     width: 1900px;
     background-repeat: none;
-    
+    z-index: 20;
     height: auto;
     background-size: contain;
-    min-height: 640px;
+    /*min-height: 640px;*/
 }
 
 

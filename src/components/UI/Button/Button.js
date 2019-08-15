@@ -4,6 +4,7 @@ const button = (props) => {
     
 
     let styles = {};
+    let position = {};
     let title = null;
     
 
@@ -12,8 +13,11 @@ const button = (props) => {
     
 
     theKeys.forEach((key, index) => {
-        if(key !== "type"){
-            styles[key] = props.styles[key];
+        if(key !== "type" || key !== 'newMargin'){
+
+            
+                styles[key] = props.styles[key];
+            
         }
     });
 
@@ -27,14 +31,34 @@ const button = (props) => {
         case 'linkedin':
             title = "Linkedin";
             break;
+
+        case 'home':
+            title= 'Home';
+            break;
+
+        case 'codepen':
+            title = "Codepen";
+            break;
+
+        case 'git':
+            title = "Github";
+            break;
             
+        case 'contact':
+            title = 'Contact';
+            break;
+
+        case 'cv':
+            title = 'Resume';
+
+            break;
         default:
             break;
     }
 
     return (
         <React.Fragment>
-            <div id={props.styles.type} style={styles} onMouseOver={props.hover} onMouseOut={props.hover} title={title}></div>
+            <div id={props.styles.type} style={styles} onMouseOver={props.hover} onMouseOut={props.hover} title={title} onClick={props.clicked}></div>
         </React.Fragment>
     );
 }
