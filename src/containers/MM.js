@@ -417,6 +417,7 @@ class MM extends Component {
         let prevWidth = null;
         let newScreenHeight = 0;
         let normalButtonPerc = 5.96;
+        let newInternalScreenHeight = null;
 
 
         let nextWidth = this.state.nextWidth;
@@ -459,7 +460,12 @@ class MM extends Component {
         newMargin = Math.floor(imgBrowserDiff / 2);
 
         
-        
+        // the current screen height
+        newInternalScreenHeight = curWidth / 1.69;
+        console.log('[newInternalScreenheight] ' + newInternalScreenHeight);
+        console.log('[this.state.screen.height] ' + this.state.screen.height);
+
+
         // console.log('[newMargin] ' + newMargin);
         // console.log("[newmargin combined] " + (newMargin + this.state.projectButton.newMargin));
         // console.log('[margin state] ' + this.state.projectButton.newMargin);
