@@ -1,0 +1,46 @@
+.Codepen {
+    z-index: 10;
+    margin-top: 10%;
+    color: slategray;
+    padding: 2%;
+    margin-bottom: 5px;
+    width: 50%;
+    position: absolute;
+    /*border: 1px solid black;
+    height: 40%;*/
+    overflow: auto;
+    
+    box-sizing: border-box;
+    transition: opacity 0.7s;
+    transition-delay: 0.4s;
+       
+}
+
+.Codepen_title {
+    font-size: 3.4vw;
+    margin: 0px;
+}
+
+.Codepen_list {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 5%;
+    
+}
+
+.Codepen_list a {
+    font-size: 1.5vw;
+    color: slategray;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5%;
+    text-align: left;
+}
+
+.Codepen_list i {
+    font-size: 3vw;
+    color: lightskyblue;
+    margin-right: 5%;
+}

@@ -1,0 +1,36 @@
+.Mobile {
+    display: grid;
+    grid-template-columns: repeat(7, 30px);
+    grid-template-rows: repeat(6, 30px);
+    grid-template-areas: ". pro pro . git git ."
+                        "lin lin . hom . cod cod"
+                        ". cont cont . res res";
+}
+
+.res {
+    grid-area: res;
+}
+
+.cont {
+    grid-area: cont;
+}
+
+.git {
+    grid-area: git;
+}
+
+.hom {
+    grid-area: hom;
+}
+
+.cod {
+    grid-area: cod;
+}
+
+.lin {
+    grid-area: lin;
+}
+
+.pro {
+    grid-area: pro;
+}

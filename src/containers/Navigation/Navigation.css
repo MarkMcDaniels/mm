@@ -1,0 +1,11 @@
+.Mobile {
+    margin-top: 15%;
+    display: grid;
+    grid-template-columns: 30px 30px 30px 45px 30px 30px 30px;
+    grid-template-rows: 30px 45px 30px 45px 30px;
+    grid-template-areas: ". pro pro . git git ."
+                        ". . . . . . ."
+                        "lin lin . hom . cod cod"
+                        ". . . . . . ."
+                        ". cont cont . res res .";
+}
