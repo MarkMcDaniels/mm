@@ -9,3 +9,7 @@
                         ". . . . . . ."
                         ". cont cont . res res .";
 }
+
+.lin {
+    grid-area: lin;
+}

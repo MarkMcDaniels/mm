@@ -13,9 +13,9 @@ import Canvas from '../containers/Canvas/Canvas';
 import Space from '../containers/Space/Space';
 import Screen from '../containers/Screen/Screen';
 import Navigation from '../containers/Navigation/Navigation';
+import CV from '../containers/CV/CV';
 
-import deck from './deck2_2_with_chair_flatter.png';
-import project_icon_green from './project_icon_green.svg';
+
 import { isAbsolute } from 'path';
 import { thisExpression, tsImportEqualsDeclaration } from '@babel/types';
 
@@ -39,7 +39,7 @@ class MM extends Component {
             marginLeft: "31.5%",
             backgroundImage: 'url(' + require('./project_icon_red.svg') + ')',
             // 33.6
-            marginTop: '44.5%',
+            marginTop: '44.45%',
             width: '55px',
             height : '55px',
             backgroundRepeat: 'no-repeat',
@@ -150,10 +150,13 @@ class MM extends Component {
         this.getHeight();
 
         // When viewing area changes size it updates like a draw()
+        //window.addEventListener('sizemodechange', this.getHeight.bind(this));
+        
+
         window.addEventListener('resize', this.getHeight.bind(this));
         
 
-
+        window.addEventListener('resize', this.setMobile.bind(this));
         
         
     }
@@ -170,11 +173,32 @@ class MM extends Component {
         }
     }
 
+
+
     componentDidUpdate () {
-        // console.log('[didupdate history]' + this.props.history.action);
         if(this.props.history.action === 'REPLACE' && this.state.screenActive){
-            // const event = {target: {id: 'home'}};
-            
+
+            let cvButton = {
+                ...this.state.cvButton,
+                backgroundImage: 'url(' + require('./cv_icon_red.svg') + ')'
+            };
+
+            let contactButton = {
+                ...this.state.contactButton,
+                backgroundImage: 'url(' + require('./mail_icon_red.svg') + ')'
+            };
+
+            if(window.innerWidth < 649){
+                cvButton = {
+                    ...this.state.cvButton,
+                    backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
+                };
+                contactButton = {
+                    ...this.state.contactButton,
+                    backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
+                };
+            }
+         
             this.setState({
                 screenActive: false,
                 prevActiveScreen: 'home',
@@ -187,10 +211,7 @@ class MM extends Component {
                     ...this.state.projectButton,
                     backgroundImage: 'url(' + require('./project_icon_red.svg') + ')'
                 },
-                contactButton: {
-                    ...this.state.contactButton,
-                    backgroundImage: 'url(' + require('./mail_icon_red.svg') + ')'
-                },
+                contactButton: contactButton,
                 linkedinButton: {
                     ...this.state.linkedinButton,
                     backgroundImage: 'url(' + require('./linkedin_icon_red.svg') + ')'
@@ -203,17 +224,15 @@ class MM extends Component {
                     ...this.state.codepenButton,
                     backgroundImage: 'url(' + require('./codepen_icon_red.svg') + ')'
                 },
-                cvButton: {
-                    ...this.state.cvButton,
-                    backgroundImage: 'url(' + require('./cv_icon_red.svg') + ')'
-                }
+                cvButton: cvButton
                 
             });
             
 
+            const screen = document.getElementById('screen');
 
-            if(this.state.mobile){
-                const screen = document.getElementById('screen');
+            if(this.state.mobile && screen !== null){
+                
                 screen.style.width = '25%';
                 screen.style.height = '1%';
                 screen.style.opacity = '0';
@@ -222,16 +241,107 @@ class MM extends Component {
             } 
             
             else if (window.innerWidth > 649 && window.location.pathname !== "/"){
+
+                
+                if(this.state.screenActive ){
+                    screen.style.width = '54%';
+                    screen.style.height = this.state.screen.height;
+                    screen.style.marginTop = '7%';
+                    screen.style.opacity = '1';
+                }
                 this.setState({
                     mobile: false
                 });
             }
+            
+            // if(window.innerWidth > 649 && this.state.screenId === 'home'){
+            //     this.setState({
+            //         screenActive: false
+            //     });
+            // }
 
-            // console.log('[screenActive] ' + this.state.screenActive);
+            
             
         }
         
-        // console.log('[prevActive in didUpdate] ' + this.state.prevActiveScreen);
+
+    }
+
+    setMobile = () => {
+        
+        const screen = document.getElementById('screen');
+        
+        let screenActive = this.state.screenActive;
+
+
+        if(window.innerWidth < 649){
+        let mobile = this.state.mobile;
+        let cvButton = {...this.state.cvButton};
+        let contactButton = {...this.state.contactButton};
+
+        if(window.innerWidth < 649){
+
+            
+                cvButton = {
+                    ...this.state.cvButton,
+                    backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
+                };
+        
+                contactButton = {
+                    ...this.state.contactButton,
+                    backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
+                };
+                mobile = true;
+          
+        
+        } else {
+            if(window.location.url !== '/'){
+                screenActive = true;
+                screen.style.width = '54%';
+                screen.style.height = this.state.screen.height;
+                screen.style.marginTop = '7%';
+                screen.style.opacity = '1';
+                screen.style.transition = 'none';
+            } else {
+                // screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
+                // screen.style.height = '1%';
+                // screenActive = false;
+                // screen.style.opacity = '0';
+            }
+
+            mobile = false;
+        }
+
+        if(window.innerWidth > 649 && window.location.url !== "/"){
+            screenActive = false;
+            screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
+            screen.style.height = '1%';
+            screenActive = false;
+            screen.style.opacity = '0';
+        }
+
+        this.setState({
+            cvButton: cvButton,
+            contactButton: contactButton,
+            mobile: mobile,
+            screenActive: screenActive
+        });
+
+    } else {
+        if(window.location.url !== "/"){
+            screenActive = true;
+            screen.style.width = '54%';
+            screen.style.height = this.state.screen.height;
+            screen.style.marginTop = '7%';
+            screen.style.opacity = '1';
+            screen.style.transition = 'none';
+        }
+
+        this.setState({
+            screenActive: screenActive
+        });
+    }
+    
 
     }
 
@@ -247,10 +357,8 @@ class MM extends Component {
         const homeButtonWidth = curWidth / 22.66;
         const homeButtonHeight = (buttonSize / 0.7);
         // height ratio 15.74 for homeButton
-        // console.log('[homebutton height] ' + homeButtonHeight);
         // width ratio 22.66 for homebutton
-        // console.log('[homebutton width] ' + homeButtonWidth);
-
+        
         // Side buttons
         const sideButtonSize = curWidth / 28.46;
         
@@ -262,11 +370,23 @@ class MM extends Component {
         
         
         // Sets mobile buttons images
-        let cvButton =  {
-            ...this.state.cvButton,
-            backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
-        };
+        let cvButton = {...this.state.cvButton};
+        let contactButton = {...this.state.contactButton};
+        let mobile = {...this.state.mobile};
+        if(window.innerWidth < 649){
+            cvButton =  {
+                ...this.state.cvButton,
+                backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
+            };
 
+            contactButton = {
+                ...this.state.contactButton,
+                backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
+            };
+            mobile = true;
+        }
+
+        
         
         this.setState({
             width: curWidth,
@@ -283,19 +403,13 @@ class MM extends Component {
             spaceHeight: spaceHeight + "px",
             spaceWidth: spaceWidth + "px",
             spaceRatio: spaceRatio,
-            cvButton: {
-                ...this.state.cvButton,
-                backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
-            },
-            contactButton: {
-                ...this.state.contactButton,
-                backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
-            }
+            cvButton: cvButton,
+            contactButton: contactButton,
+            mobile: mobile
             
             });
 
             
-        // console.log("[prevWidth baseline] " + this.state.prevWidth + " " + curWidth + " " + this.state.test);
     }
 
     setButtonWidth = () => {
@@ -314,7 +428,6 @@ class MM extends Component {
         const sideButtonSize = this.state.sideButtonSize * this.state.buttonChange;
         const sideButtonWidth = sideButtonSize + 'px';
 
-        //console.log('[contact margin] ' + this.state.contactButton.marginTop);
         const newMargin = this.state.width - this.state.nextWidth;
 
 
@@ -381,8 +494,6 @@ class MM extends Component {
         let gitButton = this.state.gitButton;
         let codepenButton = this.state.codepenButton;
 
-        
-
         switch (url){
 
             case '/':
@@ -404,12 +515,12 @@ class MM extends Component {
                 } else {
                     cvButton = {
                         ...this.state.cvButton,
-                    backgroundImage: 'url(' + require('./mail_icon_red.svg') + ')'
+                    backgroundImage: 'url(' + require('./cv_icon_red.svg') + ')'
                     };
 
                     contactButton = {
                         ...this.state.contactButton,
-                        backgroundImage: 'url(' + require('./cv_icon_red.svg') + ')'
+                        backgroundImage: 'url(' + require('./mail_icon_red.svg') + ')'
                     };
                 }
                 
@@ -703,58 +814,28 @@ class MM extends Component {
         }
 
 
+        let screenActive = this.state.screenActive;
 
+        const screen = document.getElementById('screen');
 
-
-        if(curMobile){
-            
-            
-            if(url === '/contact'){
-                cvButton = {
-                    ...this.state.cvButton,
-                    backgroundImage: 'url(' + require('./resume_icon_green_mobile.svg') + ')'
-                }
-            } else if(url === '/resume'){
-                contactButton = {
-                    ...this.state.contactButton,
-                    backgroundImage: 'url(' + require('./mail_icon_green_mobile.svg') + ')'
-                }
-            }
+        if(url === "/" && screen !== null){
+            screenActive = false;
+            screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
+            screen.style.height = '1%';
+            screen.style.opacity = '0';
         }
         
-        
         this.setState({
-            
-            homeButton: {
-                ...this.state.homeButton,
-                backgroundImage: 'url(' + require('./home_icon_green.svg') + ')'
-            },
-            projectButton: {
-                ...this.state.projectButton,
-                backgroundImage: 'url(' + require('./project_icon_red.svg') + ')'
-            },
-            contactButton: {
-                ...this.state.contactButton,
-                backgroundImage: 'url(' + require('./mail_icon_red.svg') + ')'
-            },
-            linkedinButton: {
-                ...this.state.linkedinButton,
-                backgroundImage: 'url(' + require('./linkedin_icon_red.svg') + ')'
-            },
-            gitButton: {
-                ...this.state.gitButton,
-                backgroundImage: 'url(' + require('./git_icon_red.svg') + ")"
-            },
-            codepenButton: {
-                ...this.state.codepenButton,
-                backgroundImage: 'url(' + require('./codepen_icon_red.svg') + ')'
-            },
-            cvButton: {
-                ...this.state.cvButton,
-                backgroundImage: 'url(' + require('./cv_icon_red.svg') + ')'
-            }
+            homeButton: homeButton,
+            projectButton: projectButton,
+            gitButton: gitButton,
+            cvButton: cvButton,
+            codepenButton: codepenButton,
+            contactButton: contactButton,
+            screenActive: screenActive
             
         });
+
     }
 
     onButtonClickHandler = (event) => {
@@ -763,7 +844,7 @@ class MM extends Component {
         // I've made it so differently than normal because I'm mananging the height of the screen dynamically
         // along with the deck.
 
-        // console.log('[clicked] ' + event.target.id);
+
         const screen = document.getElementById('screen');
         
 
@@ -800,7 +881,6 @@ class MM extends Component {
             }
         }
 
-        // console.log('[prevActive] ' + this.state.prevActiveScreen + " : " + event.target.id);
 
         if(this.state.prevActiveScreen === 'home'){
             this.setState({
@@ -834,13 +914,13 @@ class MM extends Component {
                     }
                 });
             }
-        } else if(this.state.prevActiveScreen === 'linkedin'){
-            this.setState({
-                linkedinButton: {
-                    ...this.state.linkedinButton,
-                    backgroundImage: 'url(' + require('./linkedin_icon_red.svg') + ')'
-                }
-            });
+        //} else if(this.state.prevActiveScreen === 'linkedin'){
+        //     this.setState({
+        //         linkedinButton: {
+        //             ...this.state.linkedinButton,
+        //             backgroundImage: 'url(' + require('./linkedin_icon_red.svg') + ')'
+        //         }
+        //     });
         } else if(this.state.prevActiveScreen === 'git'){
             this.setState({
                 gitButton: {
@@ -885,31 +965,7 @@ class MM extends Component {
                 prevActiveScreen: event.target.id
             });
         }
-        //this.buttonReset(event.target.id);
-        // console.log('[evetn id] ' + event.target.id);
-        // console.log('[screenActive] ' + this.state.screenActive);
-        // console.log('[screenId] '+ this.state.screenId);
-        // // Makes the active button green
-        // switch(event.target.id){
-        //     case 'project':
-        //         console.log('[projectButton active]');
-        //         this.setState({
-        //             test: true,
-        //             projectButton: {
-        //                 ...this.state.projectButton,
-        //                 backgroundImage: 'url(' + require('./project_icon_green.svg') + ')'
-        //             }
-        //         });
 
-
-        //         break;
-
-            
-        //     default:
-        //         break;
-        // }
-
-        // console.log('[test] ' + this.state.test);
         
     }
 
@@ -1251,12 +1307,11 @@ class MM extends Component {
         let cvButton = this.state.cvButton;
         let contactButton = this.state.contactButton;
 
-
+        console.log('[ACTIVE SCREEN BEFORE] ' + this.state.screenActive);
         let nextWidth = this.state.nextWidth;
         
         const curWidth = window.innerWidth;
-        //const curWidth = document.getElementById('mm_main').clientWidth;
-        //testWidth = nextWidth === 'auto' ? testWidth = curWidth : testWidth = nextWidth;
+
         if(nextWidth === 'auto'){
             testWidth = curWidth;
             
@@ -1266,45 +1321,32 @@ class MM extends Component {
             
         }
 
-        //prevWidth = this.state.prevWidth - curWidth;
-        // console.log("[prevWidth] " + this.state.prevWidth);
-        // console.log("[curWidth] " + curWidth);
         
         this.state.prevWidth === curWidth ? prevWidth = curWidth : prevWidth = prevWidth - curWidth;
-        //console.log("[prevWidth] after change : " + prevWidth);
+      
         
         percChange = curWidth/testWidth;
-        //console.log("[nextWidth] " + nextWidth);
-        //console.log("[curWidth] " + curWidth);
         newHeight = Math.floor(curWidth/1.7);
-        //console.log('[newHeight] ' + newHeight);
 
         newScreenHeight = newHeight / 1.75;
-        //console.log('[newscreenheight] ' + newScreenHeight);
 
         // when newHeight is larger than
         if(newHeight > window.innerHeight){
             newHeight = Math.floor(nextWidth/1.7);
             
+        } else {
+            imgBrowserDiff = window.innerHeight - newHeight;
+            newMargin = Math.floor(imgBrowserDiff / 2);
         }
-
-        imgBrowserDiff = window.innerHeight - newHeight;
-        newMargin = Math.floor(imgBrowserDiff / 2);
-
-        //console.log('[imgBrowserDiff] ' + imgBrowserDiff);
+        
+        
+        
 
         // Set space and stars
         const spaceWidth = curWidth / 1.02;
         const spaceRatio = this.state.spaceRatio;
         const spaceHeight = spaceWidth / spaceRatio;
 
-        //console.log('[onResize heigth-width-ratio before]' + spaceHeight + "-" + spaceWidth + '-' + spaceRatio);
-    
-        //console.log('[newMargin] ' + newMargin);
-        // console.log("[newmargin combined] " + (newMargin + this.state.projectButton.newMargin));
-        // console.log('[margin state] ' + this.state.projectButton.newMargin);
-        // console.log('[projecMargin imgBrowser] ' + (this.state.projectButton.newMargin + imgBrowserDiff));
-        //this.setState({width: curWidth});
 
         // mobile buttons and state management.
         if(window.innerWidth > 649){
@@ -1316,6 +1358,7 @@ class MM extends Component {
             };
 
         }
+
 
         this.setState({
             width: "auto",
@@ -1330,8 +1373,6 @@ class MM extends Component {
             spaceHeight: spaceHeight + 'px',
             spaceWidth: spaceWidth+'px'
         });
-        //console.log(newHeight + " new height");
-        //console.log('[onResize heigth-width-ratio after]' + this.state.spaceHeight + "-" + this.state.spaceWidth + '-' + this.state.spaceRatio);
 
         // Sets the new height of the internal screen, and removes the transition so it changes smoothly.
         const screen = document.getElementById('screen');
@@ -1352,9 +1393,9 @@ class MM extends Component {
 
         }
 
+            
         
-        
-
+        console.log('[ACTIVE SCREEN AFTER] ' + this.state.screenActive);
 
         this.setButtonWidth();
         
@@ -1362,6 +1403,7 @@ class MM extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.getHeight.bind(this));
+        window.addEventListener('resize', this.setMobile.bind(this));
     
 
     }
@@ -1371,7 +1413,6 @@ class MM extends Component {
         // Redirects when url is accessed without the screen being active. This means the user hasn't clicked any buttons.
         const url = window.location.pathname;
 
-        //console.log('[redirect] ' + url);
         if(url !== "/" && !this.state.screenActive){
             return <Redirect from={url} to="/" />;
         } else if(url === "/" && this.state.screenActive){
@@ -1578,9 +1619,7 @@ class MM extends Component {
             <div id="mm_main" className="Deck" style={deckStyles} ref="mm" onMouseOver={this.state.hoverButton}>
                 
                 <Space styles={space} mobile={window.innerWidth < 649 ? true : false} ratio={this.state.spaceRatio} />
-                {/*<div id="space" style={space} >
-                    <Canvas spaceWidth={this.state.spaceWidth} spaceHeight={this.state.spaceHeight} mobile={window.innerWidth} />
-                </div>*/}
+                
                 <Navigation
                  mobile={window.innerWidth < 649 ? true : false} styles={buttons} 
                  projectButton={projectButton} 
@@ -1591,23 +1630,16 @@ class MM extends Component {
                  linkedinButton={linkedinButton}
                  gitButton={gitButton}
 
+
                  hover={this.hoverButton}
                  clicked={this.onButtonClickHandler}
 
                 />
-                {/*<div style={buttons}>
-                    <Button styles={this.state.projectButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} ></Button>
-                    <Button styles={this.state.linkedinButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                    <Button styles={this.state.homeButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                    <Button styles={this.state.gitButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                    <Button styles={this.state.codepenButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                    <Button styles={this.state.contactButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                    <Button styles={this.state.cvButton} hover={this.hoverButton} clicked={this.state.onButtonClickHandler} />
-                </div>*/}
+          
                 <Screen styles={screen} mobile={window.innerWidth < 649 ? true : false} />
-                {/*<div id="screen" style={screen}></div>*/}
                 <Switch>
                     {redirect}
+                    <Route path='/resume' component={CV} />
                     <Route path='/projects' render={() => <Projects mobile={window.innerWidth < 649 ? true : false} />} />
                     <Route path="/contact" render={() => <Contact />} />
                     <Route path='/github' component={Github} />

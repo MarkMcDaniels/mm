@@ -14,6 +14,7 @@ const button = (props) => {
     let path = null;
     let gridArea = null;
     let img = null;
+    let url = null;
     
     theKeys.forEach((key, index) => {
         if(key !== "type" || key !== 'newMargin'){
@@ -24,8 +25,6 @@ const button = (props) => {
         }
     });
 
-    // console.log(props.styles.type);
-    // console.log(styles);
     switch (props.styles.type) {
         case 'project':
             title = 'Projects';
@@ -41,6 +40,7 @@ const button = (props) => {
         case 'linkedin':
             title = "Linkedin";
             gridArea = 'lin';
+            path = "https://www.linkedin.com/in/mark-mcdaniels-68b39789";
             break;
 
         case 'home':
@@ -98,6 +98,9 @@ const button = (props) => {
             title = 'Resume';
             path = '/m-resume';
             break;  
+
+       
+
         default:
             break;
     }
@@ -106,21 +109,32 @@ const button = (props) => {
         classes = gridArea + " Mobile";
         img = styles['backgroundImage'];
 
-        // styles = {
-        //     'backgroundImage': img,
-        //     'height': '60px',
-        //     'width': '60px',
-        //     back
-        // }
+        
         
     }
+
+    let button = (
+        <Link to={path}>
+            <div id={props.styles.type} className={classes} style={styles} onMouseOver={props.hover} onMouseOut={props.hover} title={title} onClick={props.clicked} onMouseLeave={props.reset} ></div>
+        </Link>
+
+        
+    );
+    
+    
+    // if(title === 'Linkedin'){
+    //     console.log('[title] ' + title);
+    //     let button =  (
+    //         <a href="https://www.linkedin.com/in/mark-mcdaniels-68b39789">
+    //             <div id={props.styles.type} className={classes} style={styles} onMouseOver={props.hover} onMouseOut={props.hover} title={title} onMouseLeave={props.reset} ></div>
+    //         </a>
+    //     );
+    // }
     
     return (
         <div style={{'gridArea': gridArea}}>
-            <Link to={path}>
-                <div id={props.styles.type} className={classes} style={styles} onMouseOver={props.hover} onMouseOut={props.hover} title={title} onClick={props.clicked} onMouseLeave={props.reset} ></div>
-            </Link>
             
+            {button}
         </div>
     );
 }

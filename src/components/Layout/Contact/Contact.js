@@ -12,7 +12,7 @@ class Contact extends Component {
         email: '',
         message: "",
         contact: {
-            height: '600px'
+            height: '100%'
         },
         opacity: '0',
         emailValidated: false,
@@ -40,15 +40,16 @@ class Contact extends Component {
 
         // Looks strange, but I'm finding width by ratio for the screen with total width, and then getting the height by ratio to the screen width. They happen to be the same numerically.
         let newHeight = (curWidth / 1.85) / 1.91;
-        console.log('[newHeight in contact] ' + newHeight);
         
         // Sets new height dynamically
         const url = window.location.pathname;
         
         // React's lifecycle was still holding refrences to the components variables of the link before the current route.
-        if(url === '/contact'){
+        if(url === '/contact' && window.innerWidth > 649){
         const contact = document.getElementById('contact_screen');
         contact.style.height = String(newHeight) + "px";
+        } else {
+            newHeight = '100%';
         }
 
         this.setState({
@@ -150,20 +151,47 @@ class Contact extends Component {
             err = <i style={{'color': 'red'}}>--INVALID EMAIL ADDRESS!</i>;
         }
 
-        const styles = {
+        let styles = {
             'height': this.state.contact.height,
-            'opacity': this.state.opacity
+            'opacity': this.state.opacity,
+            'backgroundColor': 'white'
         };
+
+        let pStyle = null;
+        let mLabel = null;
+        let mButton = null;
+
+        if(window.innerWidth < 649){
+            styles = {
+                'width': '100%',
+                'height': '100%',
+                'backgroundColor': 'white',
+                'overflow': 'auto'
+            };
+
+            pStyle = {
+                'fontSize': '1.5rem',
+                'textAlign': 'center'
+            };
+
+            mLabel = {
+                'fontSize': '0.8rem'
+            };
+
+            mButton = {
+                'fontSize': '0.8rem'
+            }
+        }
         
         return (
             <div id="contact_screen" className="Contact" style={styles}>
-                <p>Contact Me</p>
+                <p style={pStyle}>Contact Me</p>
                 <div className="form">
-                    <label><i style={{'color': 'red'}}>*</i> Email:{err}</label>
+                    <label style={mLabel}><i style={{'color': 'red'}}>*</i> Email:{err}</label>
                     <input type="email" name="email" value={this.state.email} onChange={this.onEmailChangeHandler} />
-                    <label><i style={{'color': 'red'}}>*</i> Message:</label>
+                    <label style={mLabel}><i style={{'color': 'red'}}>*</i> Message:</label>
                     <textarea onChange={this.onMessageChangeHandler} ></textarea>
-                    <button type="submit" onClick={this.sumbitHandler}>Submit</button>
+                    <button style={mButton} type="submit" onClick={this.sumbitHandler}>Submit</button>
                 </div>
                 
             </div>

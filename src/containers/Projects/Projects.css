@@ -9,10 +9,11 @@
     /*border: 1px solid black;
     height: 40%;*/
     overflow: auto;
-    
+    text-align: center;
     box-sizing: border-box;
     transition: opacity 0.7s;
     transition-delay: 0.4s;
+    padding-top: 0px;
        
 }
 
@@ -93,10 +94,10 @@
   /*    ================ mobile section ===============      */
 
   .Projects_mobile {
-      padding: 0px;
+      padding: 20px;
       margin: 0px;
       font-size: 0.8rem;
-      position: absolute;
+      position: relative;
   }
 
   .Project_item_mobile {
@@ -111,3 +112,11 @@
       font-size: 0.8rem;
       align-content: flex-start;
   }
+
+  .Project_title_mobile {
+      width: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+      color: slategray;
+  }
+

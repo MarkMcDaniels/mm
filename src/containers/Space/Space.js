@@ -21,10 +21,6 @@ class Space extends Component {
     getHeight = () => {
         const curWidth = window.innerWidth;
         const height = curWidth / this.props.ratio;
-        console.log('[curWidth -- space] ' + curWidth);
-        console.log('[height --- space] ' + height );
-        console.log('[ratio -- space] ' + this.props.ratio);
-
         this.setState({
             width: curWidth + 'px',
             height: height + 'px'

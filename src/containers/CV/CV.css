@@ -1,0 +1,56 @@
+.CV {
+    position: absolute;
+    width: 50%;
+    color: slategray;
+    box-sizing: border-box;
+    margin-top: 10%;
+    overflow: auto;
+
+    z-index: 10;
+    transition: opacity 0.7s;
+    transition-delay: 0.4s;
+    padding: 3%;
+    padding-top: 0px;
+}
+
+
+
+.CV_title {
+    font-size: 3.4vw;
+    margin: 0px;
+    justify-content: flex-start;
+    text-align: left;
+    
+}
+
+.CV_list {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 2%;
+    margin-bottom: 50px;
+    overflow: auto;
+}
+
+.CV_position {
+    font-size: 1.3vw;
+    justify-content: space-between;
+}
+
+.CV_p {
+    font-size: 1.5vw;
+    margin: 0px 0px 20px 0px;
+
+    width: 100%;
+    text-align: left;
+}
+
+.CV ul {
+    font-size: 1.5vw;
+}
+
+.CV a {
+    color: slategray;
+}
