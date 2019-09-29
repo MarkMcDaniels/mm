@@ -19,8 +19,6 @@ import CV from '../containers/CV/CV';
 import { isAbsolute } from 'path';
 import { thisExpression, tsImportEqualsDeclaration } from '@babel/types';
 
-//import { CustomConsole } from '@jest/console';
-// import { eventNames } from 'cluster';
 
 class MM extends Component {
 
@@ -254,11 +252,7 @@ class MM extends Component {
                 });
             }
             
-            // if(window.innerWidth > 649 && this.state.screenId === 'home'){
-            //     this.setState({
-            //         screenActive: false
-            //     });
-            // }
+            
 
             
             
@@ -275,72 +269,73 @@ class MM extends Component {
 
 
         if(window.innerWidth < 649){
-        let mobile = this.state.mobile;
-        let cvButton = {...this.state.cvButton};
-        let contactButton = {...this.state.contactButton};
+            let mobile = this.state.mobile;
+            let cvButton = {...this.state.cvButton};
+            let contactButton = {...this.state.contactButton};
 
-        if(window.innerWidth < 649){
+            if(window.innerWidth < 649){
 
+                
+                    cvButton = {
+                        ...this.state.cvButton,
+                        backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
+                    };
             
-                cvButton = {
-                    ...this.state.cvButton,
-                    backgroundImage: 'url(' + require('./resume_icon_red_mobile.svg') + ')'
-                };
-        
-                contactButton = {
-                    ...this.state.contactButton,
-                    backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
-                };
-                mobile = true;
-          
-        
+                    contactButton = {
+                        ...this.state.contactButton,
+                        backgroundImage: 'url(' + require('./mail_icon_red_mobile.svg') + ')'
+                    };
+                    mobile = true;
+            
+            
+            } else {
+                if(window.location.url !== '/'){
+                    screenActive = true;
+                    screen.style.width = '54%';
+                    screen.style.height = this.state.screen.height;
+                    screen.style.marginTop = '7%';
+                    screen.style.opacity = '1';
+                    screen.style.transition = 'none';
+                } else {
+                    // screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
+                    // screen.style.height = '1%';
+                    // screenActive = false;
+                    // screen.style.opacity = '0';
+                }
+
+                mobile = false;
+            }
+
+            if(window.innerWidth > 649 && window.location.url !== "/"){
+                screenActive = false;
+                screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
+                screen.style.height = '1%';
+                screenActive = false;
+                screen.style.opacity = '0';
+            }
+
+            this.setState({
+                cvButton: cvButton,
+                contactButton: contactButton,
+                mobile: mobile,
+                screenActive: screenActive
+            });
+
         } else {
-            if(window.location.url !== '/'){
+            if(window.location.url !== "/"){
                 screenActive = true;
                 screen.style.width = '54%';
                 screen.style.height = this.state.screen.height;
                 screen.style.marginTop = '7%';
                 screen.style.opacity = '1';
                 screen.style.transition = 'none';
-            } else {
-                // screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
-                // screen.style.height = '1%';
-                // screenActive = false;
-                // screen.style.opacity = '0';
             }
 
-            mobile = false;
+            this.setState({
+                screenActive: screenActive
+            });
+
         }
-
-        if(window.innerWidth > 649 && window.location.url !== "/"){
-            screenActive = false;
-            screen.style.transition = 'width 0.4s, height 1s, margin-top 1s, opacity 0.5s';
-            screen.style.height = '1%';
-            screenActive = false;
-            screen.style.opacity = '0';
-        }
-
-        this.setState({
-            cvButton: cvButton,
-            contactButton: contactButton,
-            mobile: mobile,
-            screenActive: screenActive
-        });
-
-    } else {
-        if(window.location.url !== "/"){
-            screenActive = true;
-            screen.style.width = '54%';
-            screen.style.height = this.state.screen.height;
-            screen.style.marginTop = '7%';
-            screen.style.opacity = '1';
-            screen.style.transition = 'none';
-        }
-
-        this.setState({
-            screenActive: screenActive
-        });
-    }
     
 
     }
@@ -1307,7 +1302,6 @@ class MM extends Component {
         let cvButton = this.state.cvButton;
         let contactButton = this.state.contactButton;
 
-        console.log('[ACTIVE SCREEN BEFORE] ' + this.state.screenActive);
         let nextWidth = this.state.nextWidth;
         
         const curWidth = window.innerWidth;
@@ -1394,8 +1388,6 @@ class MM extends Component {
         }
 
             
-        
-        console.log('[ACTIVE SCREEN AFTER] ' + this.state.screenActive);
 
         this.setButtonWidth();
         
